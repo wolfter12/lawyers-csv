@@ -2,11 +2,13 @@ import {
   AGE,
   EMAIL,
   EXPERIENCE,
+  EXPIRATION_DATE,
   PHONE,
   YEARLY_INCOME,
 } from '../configs/header-accessors';
 import { validate as emailValidator } from 'email-validator';
-import { MAX_YEARLY_INCOME } from '../configs/constants';
+import { DATE_FORMATS, MAX_YEARLY_INCOME } from '../configs/constants';
+import moment from 'moment';
 
 export const isFullNameValid = (value) => {
   if (typeof value !== 'string' || value.length === 0) {
@@ -52,6 +54,7 @@ export const isAgeValid = (value) => {
 };
 
 // TODO: Ask a client about type of number (int or float)
+// TODO: Use constants instead of magic numbers
 export const isExperienceValid = (value, age = 21) => {
   const checkExperience = (number, currentAge) => {
     return number >= 0 && number <= currentAge - 21;
@@ -91,6 +94,17 @@ export const isYearlyIncomeValid = (value) => {
   }
 };
 
+export const isExpirationDateValid = (value) => {
+  if (typeof value !== 'string') {
+    return false;
+  }
+  const isValidFormat = moment(value, DATE_FORMATS, true).isValid();
+  if (isValidFormat) {
+    return moment().diff(value) <= 0;
+  }
+  return false;
+};
+
 const validator = (value, header, row) => {
   switch (header) {
     case PHONE:
@@ -103,6 +117,8 @@ const validator = (value, header, row) => {
       return isExperienceValid(value, row.age);
     case YEARLY_INCOME:
       return isYearlyIncomeValid(value);
+    case EXPIRATION_DATE:
+      return isExpirationDateValid(value);
     default:
       return true;
   }
