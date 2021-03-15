@@ -35,7 +35,7 @@ function Table() {
               {row.cells.map((cell) => {
                 const { id: header } = cell.column;
                 const { value } = cell;
-                let isValid = validator(value, header);
+                let isValid = validator(value, header, cell.row.original);
 
                 // TODO: find more safer way to add class
                 const cellProps = { ...cell.getCellProps() };
