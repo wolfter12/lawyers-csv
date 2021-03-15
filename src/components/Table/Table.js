@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import BTable from 'react-bootstrap/Table';
 import { useTable } from 'react-table';
 import columns from '../../configs/columns';
+import validator from '../../utils/validator';
 
 function Table() {
   // TODO: useMemo to not recalculate on every single render
@@ -15,29 +16,8 @@ function Table() {
     data,
   });
 
-  // const thead = (
-  //   <thead>
-  //     <tr>
-  //       {data.length !== 0
-  //         ? Object.keys(data[0]).map((key) => <th>{key}</th>)
-  //         : null}
-  //       {/* {Object.keys(data[0]).forEach((key) => {
-  //         console.log(key);
-  //       })} */}
-  //     </tr>
-  //   </thead>
-  // );
-  // const tbody = (
-  //   <tbody>
-  //     <tr>
-  //       <th>1</th>
-  //       <th>2</th>
-  //     </tr>
-  //   </tbody>
-  // );
-
   return (
-    <BTable striped bordered hover size="sm" {...getTableProps()}>
+    <BTable striped bordered hover size="md" {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -53,7 +33,20 @@ function Table() {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                const { id: header } = cell.column;
+                const { value } = cell;
+                let isValid = validator(value, header);
+
+                // TODO: find more safer way to add class
+                const cellProps = { ...cell.getCellProps() };
+                if (!isValid) {
+                  if (cellProps.hasOwnProperty('className')) {
+                    cellProps.className = `${cellProps.className} table-warning`;
+                  } else {
+                    cellProps.className = 'table-warning';
+                  }
+                }
+                return <td {...cellProps}>{cell.render('Cell')}</td>;
               })}
             </tr>
           );
