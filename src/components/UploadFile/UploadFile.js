@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { parseFile } from '../../actions/dataActions';
 import { Button, Form } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function UploadFile() {
   const [file, setFile] = useState({});
