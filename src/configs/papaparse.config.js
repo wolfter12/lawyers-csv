@@ -29,6 +29,7 @@ const options = {
   transformHeader: headerNormalize,
   comments: true,
   transform: dataNormalize,
+  dynamicTyping: true, // can be a problem with display data
 };
 
 export default options;
