@@ -41,7 +41,11 @@ export const isAgeValid = (value) => {
     case 'number':
       return checkAge(value);
     case 'string':
-      return checkAge(Number(value));
+      const ageNumber = Number(value);
+      if (isNaN(ageNumber)) {
+        return false;
+      }
+      return checkAge(ageNumber);
     default:
       return false;
   }
