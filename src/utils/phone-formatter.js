@@ -1,6 +1,7 @@
 import phone from 'phone';
 
 // TODO: ask client about conditions
+// TODO: move regex to constants
 const phoneFormatter = (phoneNumber) => {
   const isValid =
     /^\+1\d{10}$/.test(phoneNumber) ||
