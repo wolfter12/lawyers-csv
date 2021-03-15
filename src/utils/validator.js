@@ -1,4 +1,4 @@
-import { AGE, EMAIL, PHONE } from '../configs/header-accessors';
+import { AGE, EMAIL, EXPERIENCE, PHONE } from '../configs/header-accessors';
 import { validate as emailValidator } from 'email-validator';
 
 export const isFullNameValid = (value) => {
@@ -40,7 +40,28 @@ export const isAgeValid = (value) => {
   }
 };
 
-const validator = (value, header) => {
+// TODO: Ask a client about type of number (int or float)
+export const isExperienceValid = (value, age = 21) => {
+  const checkExperience = (number, currentAge) => {
+    return number >= 0 && number <= currentAge - 21;
+  };
+  const ageType = typeof age;
+  const ageValue = ageType === 'number'
+    ? age
+    : ageType === 'string'
+      ? Number(age)
+      : 0;
+  switch (typeof value) {
+    case 'number':
+      return checkExperience(value, ageValue);
+    case 'string':
+      return checkExperience(Number(value), ageValue);
+    default:
+      return false;
+  }
+};
+
+const validator = (value, header, row) => {
   switch (header) {
     case PHONE:
       return isPhoneValid(value);
@@ -48,6 +69,9 @@ const validator = (value, header) => {
       return isEmailValid(value);
     case AGE:
       return isAgeValid(value);
+    case EXPERIENCE:
+      console.log('row', row);
+      return isExperienceValid(value, row.age);
     default:
       return true;
   }
