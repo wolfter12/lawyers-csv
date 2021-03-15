@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { parseFile } from '../../actions/dataActions';
+import { Button, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function UploadFile() {
   const [file, setFile] = useState({});
@@ -22,9 +24,15 @@ function UploadFile() {
 
   return (
     <div>
-      <input type="file" name="file" onChange={changeHandler} />
-      <button onClick={parseSelectedFile}>Parse file</button>
-      <button onClick={showData}>Show Data</button>
+      <Form.Group>
+        <Form.File
+          label="Example file input"
+          accept=".csv"
+          onChange={changeHandler}
+        />
+      </Form.Group>
+      <Button onClick={parseSelectedFile}>Parse file</Button>
+      <Button onClick={showData}>Show Data</Button>
     </div>
   );
 }
