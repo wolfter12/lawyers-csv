@@ -44,8 +44,8 @@ const columns = [
     accessor: 'licenseNumber',
   },
   {
-    Header: 'Duplication',
-    accessor: 'duplication',
+    Header: 'Duplicate with',
+    accessor: 'duplicateWith',
   },
 ];
 
