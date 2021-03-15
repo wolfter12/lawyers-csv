@@ -3,6 +3,7 @@ import csv from '../parser/csv';
 import getDuplication from '../utils/mark-duplication';
 import { HAS_CHILDREN } from '../configs/header-accessors';
 
+// TODO: convert all boolean to string
 export const parseFile = (file) => (dispatch) => {
   if (file instanceof Blob) {
     csv(file)
