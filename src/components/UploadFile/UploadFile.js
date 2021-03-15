@@ -15,6 +15,7 @@ function UploadFile() {
 
   const parseSelectedFile = () => {
     dispatch(parseFile(file));
+    setFile({});
   };
 
   const showData = () => {
