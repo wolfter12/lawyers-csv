@@ -63,7 +63,11 @@ export const isExperienceValid = (value, age = 21) => {
     case 'number':
       return checkExperience(value, ageValue);
     case 'string':
-      return checkExperience(Number(value), ageValue);
+      const experienceNumber = Number(value);
+      if (isNaN(experienceNumber)) {
+        return false;
+      }
+      return checkExperience(experienceNumber, ageValue);
     default:
       return false;
   }
