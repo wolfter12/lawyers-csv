@@ -1,0 +1,12 @@
+export const ID = 'id';
+export const FULL_NAME = 'fullName';
+export const PHONE = 'phone';
+export const EMAIL = 'email';
+export const AGE = 'age';
+export const EXPERIENCE = 'experience';
+export const YEARLY_INCOME = 'yearlyIncome';
+export const HAS_CHILDREN = 'hasChildren';
+export const LICENSE_STATES = 'licenseStates';
+export const EXPIRATION_DATE = 'expirationDate';
+export const LICENSE_NUMBER = 'licenseNumber';
+export const DUPLICATE_WITH = 'duplicateWith';
