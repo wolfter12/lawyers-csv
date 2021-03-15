@@ -1,14 +1,23 @@
 import _ from 'lodash';
+import phoneFormatter from '../utils/phone-formatter';
+import emailFormatter from '../utils/email-formatter';
 
 const dataNormalize = (value, header) => {
   if (typeof value !== 'string') {
     return value;
   }
   let str = _.trim(value, `'" `);
-  if (header === 'email') {
-    str = _.toLower(str);
+
+  switch (header) {
+    case 'phone':
+      return phoneFormatter(str);
+
+    case 'email':
+      return emailFormatter(str);
+
+    default:
+      return str;
   }
-  return str;
 };
 
 const headerNormalize = (value) => _.camelCase(value.toLowerCase());
