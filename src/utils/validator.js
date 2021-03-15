@@ -3,6 +3,7 @@ import {
   EMAIL,
   EXPERIENCE,
   EXPIRATION_DATE,
+  HAS_CHILDREN,
   PHONE,
   YEARLY_INCOME,
 } from '../configs/header-accessors';
@@ -105,6 +106,14 @@ export const isExpirationDateValid = (value) => {
   return false;
 };
 
+export const isHasChildrenValid = (value) => {
+  if (typeof value !== 'string') {
+    return false;
+  }
+  return value === 'true' || value === 'false' || value.length === 0;
+};
+
+// TODO: Add exception for not important columns
 const validator = (value, header, row) => {
   switch (header) {
     case PHONE:
@@ -119,6 +128,8 @@ const validator = (value, header, row) => {
       return isYearlyIncomeValid(value);
     case EXPIRATION_DATE:
       return isExpirationDateValid(value);
+    case HAS_CHILDREN:
+      return isHasChildrenValid(value);
     default:
       return true;
   }
