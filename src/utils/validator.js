@@ -112,8 +112,7 @@ export const isHasChildrenValid = (value) => {
   if (typeof value !== 'string') {
     return false;
   }
-  // if it is an empty string then field is valid
-  return value === 'true' || value === 'false' || value.length === 0;
+  return value === 'true' || value === 'false';
 };
 
 export const isLicenseNumberValid = (value) => {
