@@ -5,12 +5,14 @@ import {
   EXPIRATION_DATE,
   HAS_CHILDREN,
   LICENSE_NUMBER,
+  LICENSE_STATES,
   PHONE,
   YEARLY_INCOME,
 } from '../configs/header-accessors';
 import { validate as emailValidator } from 'email-validator';
 import { DATE_FORMATS, MAX_YEARLY_INCOME } from '../configs/constants';
 import moment from 'moment';
+import statesJSON from '../configs/states_titlecase.json';
 
 export const isFullNameValid = (value) => {
   if (typeof value !== 'string' || value.length === 0) {
@@ -127,6 +129,21 @@ export const isLicenseNumberValid = (value) => {
   }
 };
 
+export const isLicenseStateValid = (value) => {
+  if (typeof value !== 'string' || value.length === 0) {
+    return false;
+  }
+  const currentStates = value.split(/\s*\|\s*/);
+  return currentStates.every((str) => {
+    return statesJSON.some(({ name, abbreviation }) => {
+      return (
+        name.toLowerCase() === str.toLowerCase() ||
+        abbreviation.toLowerCase() === str.toLowerCase()
+      );
+    });
+  });
+};
+
 // TODO: Add exception for not important columns
 const validator = (value, header, row) => {
   switch (header) {
@@ -146,6 +163,8 @@ const validator = (value, header, row) => {
       return isHasChildrenValid(value);
     case LICENSE_NUMBER:
       return isLicenseNumberValid(value);
+    case LICENSE_STATES:
+      return isLicenseStateValid(value);
     default:
       return true;
   }
