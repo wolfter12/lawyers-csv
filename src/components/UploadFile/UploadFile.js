@@ -11,7 +11,6 @@ function UploadFile() {
   const handleFiles = (files) => {
     const [file] = files;
     const { name } = file;
-    console.log(file);
     if (name.split('.').pop() === 'csv') {
       dispatch(parseFile(file));
     }

@@ -27,7 +27,6 @@ export const parseFile = (file) => (dispatch) => {
       .then(convertHasChildren)
       .then(convertLicenseStates)
       .then((data) => {
-        console.log(data);
         dispatch({
           type: PARSE_FILE,
           payload: data,

@@ -1,10 +1,10 @@
+export const MIN_AGE = 21;
+export const MAX_AGE = 150;
 export const MIN_YEARLY_INCOME = 0;
 export const MAX_YEARLY_INCOME = 1000000;
 export const DATE_FORMATS = ['YYYY-MM-DD', 'MM/DD/YYYY'];
+export const PHONE_FORMATS = [/^\+1\d{10}$/, /^1\d{10}$/, /^\d{10}$/];
+export const LICENSE_NUMBER_FORMATS = [/^[a-zA-Z0-9]{6}$/];
 export const WARNING_MESSAGE = 'File format is not correct';
 export const WARNING_ALERT_VARIANT = 'danger';
 export const INVALID_CELL = 'table-danger';
-export const PHONE_FORMATS = [/^\+1\d{10}$/, /^1\d{10}$/, /^\d{10}$/];
-export const MIN_AGE = 21;
-export const MAX_AGE = 150;
-export const LICENSE_NUMBER_FORMATS = [/^[a-zA-Z0-9]{6}$/];
