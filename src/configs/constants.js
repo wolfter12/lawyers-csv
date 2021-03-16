@@ -8,3 +8,4 @@ export const LICENSE_NUMBER_FORMATS = [/^[a-zA-Z0-9]{6}$/];
 export const WARNING_MESSAGE = 'File format is not correct';
 export const WARNING_ALERT_VARIANT = 'danger';
 export const INVALID_CELL = 'table-danger';
+export const IMPORT_BUTTON_VARIANT = 'success';
