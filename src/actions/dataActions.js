@@ -1,40 +1,26 @@
-import Ajv from 'ajv';
 import { PARSE_FILE, VALID_STRUCTURE } from './types';
 import {
   HAS_CHILDREN,
   LICENSE_STATES,
   YEARLY_INCOME,
 } from '../configs/header-accessors';
+import { WARNING_MESSAGE } from '../configs/constants';
 import statesJSON from '../configs/states_titlecase.json';
 import csv from '../parser/csv';
 import getDuplication from '../utils/mark-duplication';
-import { valuesIn } from 'lodash';
+import requiredFieldValidator from '../utils/csv-required-fields-validator';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
 export const parseFile = (file) => (dispatch) => {
   if (file instanceof Blob) {
     csv(file)
-      .then(({ data }) => {
-        const ajv = new Ajv();
-        const schema = {
-          properties: {
-            fullName: { type: 'string' },
-            phone: { type: ['string', 'integer'] },
-            email: { type: 'string' },
-          },
-          required: ['fullName', 'phone', 'email'],
-        };
-        const validate = ajv.compile(schema);
-        const valid = data.every((obj) => validate(obj));
+      .then(({ data }) => requiredFieldValidator(data))
+      .then((data) => {
         dispatch({
           type: VALID_STRUCTURE,
-          valid,
+          valid: true,
         });
-        console.log('is valid', valid);
-        if (!valid) {
-          return Promise.reject('File format is not correct');
-        }
         return data;
       })
       .then((data) => data.map((obj, idx) => ({ id: idx + 1, ...obj })))
@@ -88,6 +74,12 @@ export const parseFile = (file) => (dispatch) => {
       })
       .catch((err) => {
         console.error(err);
+        if (err === WARNING_MESSAGE) {
+          dispatch({
+            type: VALID_STRUCTURE,
+            valid: false,
+          });
+        }
       });
   }
 };
