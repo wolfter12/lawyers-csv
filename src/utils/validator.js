@@ -62,9 +62,9 @@ export const isAgeValid = (value) => {
 
 // TODO: Ask a client about type of number (int or float)
 // TODO: Use constants instead of magic numbers
-export const isExperienceValid = (value, age = 21) => {
+export const isExperienceValid = (value, age = MIN_AGE) => {
   const checkExperience = (number, currentAge) => {
-    return number >= 0 && number <= currentAge - 21;
+    return number >= 0 && number <= currentAge - MIN_AGE;
   };
   const ageType = typeof age;
   const ageValue =
