@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/lawyers-csv/static/css/main.cd023121.chunk.css",
+    "main.js": "/lawyers-csv/static/js/main.827f8230.chunk.js",
+    "main.js.map": "/lawyers-csv/static/js/main.827f8230.chunk.js.map",
+    "runtime-main.js": "/lawyers-csv/static/js/runtime-main.287e704b.js",
+    "runtime-main.js.map": "/lawyers-csv/static/js/runtime-main.287e704b.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/lawyers-csv/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.b76fbefc.chunk.js": "/lawyers-csv/static/js/2.b76fbefc.chunk.js",
+    "static/js/2.b76fbefc.chunk.js.map": "/lawyers-csv/static/js/2.b76fbefc.chunk.js.map",
+    "static/js/3.f95985cb.chunk.js": "/lawyers-csv/static/js/3.f95985cb.chunk.js",
+    "static/js/3.f95985cb.chunk.js.map": "/lawyers-csv/static/js/3.f95985cb.chunk.js.map",
+    "index.html": "/lawyers-csv/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/lawyers-csv/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.cd023121.chunk.css.map": "/lawyers-csv/static/css/main.cd023121.chunk.css.map",
+    "static/js/2.b76fbefc.chunk.js.LICENSE.txt": "/lawyers-csv/static/js/2.b76fbefc.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.287e704b.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.b76fbefc.chunk.js",
+    "static/css/main.cd023121.chunk.css",
+    "static/js/main.827f8230.chunk.js"
+  ]
+}
