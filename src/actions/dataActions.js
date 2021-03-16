@@ -1,9 +1,14 @@
 import Ajv from 'ajv';
 import { PARSE_FILE, VALID_STRUCTURE } from './types';
-import { HAS_CHILDREN, LICENSE_STATES } from '../configs/header-accessors';
+import {
+  HAS_CHILDREN,
+  LICENSE_STATES,
+  YEARLY_INCOME,
+} from '../configs/header-accessors';
 import statesJSON from '../configs/states_titlecase.json';
 import csv from '../parser/csv';
 import getDuplication from '../utils/mark-duplication';
+import { valuesIn } from 'lodash';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
@@ -34,6 +39,18 @@ export const parseFile = (file) => (dispatch) => {
       })
       .then((data) => data.map((obj, idx) => ({ id: idx + 1, ...obj })))
       .then((data) => getDuplication(data))
+      .then((data) => {
+        return data.map((obj) => {
+          const value = obj[YEARLY_INCOME];
+          if (typeof value === 'number' && !Number.isNaN(value)) {
+            return {
+              ...obj,
+              [YEARLY_INCOME]: Number.parseFloat(value).toFixed(2),
+            };
+          }
+          return obj;
+        });
+      })
       .then((data) =>
         data.map((obj) => {
           const hasChildren =
