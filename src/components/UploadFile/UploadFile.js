@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { parseFile } from '../../actions/dataActions';
 import { Button, Form } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
 function UploadFile() {
   const [file, setFile] = useState({});
@@ -23,7 +24,7 @@ function UploadFile() {
   };
 
   return (
-    <div>
+    <Container fluid className="flex-column mt-4 mb-4">
       <Form.Group>
         <Form.File
           label="Example file input"
@@ -33,7 +34,7 @@ function UploadFile() {
       </Form.Group>
       <Button onClick={parseSelectedFile}>Parse file</Button>
       <Button onClick={showData}>Show Data</Button>
-    </div>
+    </Container>
   );
 }
 
