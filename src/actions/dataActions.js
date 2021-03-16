@@ -13,19 +13,19 @@ import convertLicenseStates from '../utils/convert-license-states';
 export const parseFile = (file) => (dispatch) => {
   if (file instanceof Blob) {
     csv(file)
-      .then(({ data }) => requiredFieldValidator(data))
-      .then((data) => {
+      .then(({ data }) => requiredFieldValidator(data)) // Validation of required fields - fullName, phone, email
+      .then((data) => { // if everything ok then data structure is valid
         dispatch({
           type: VALID_STRUCTURE,
           valid: true,
         });
         return data;
       })
-      .then(addId)
-      .then(addDuplicationField)
-      .then(convertYearlyIncome)
-      .then(convertHasChildren)
-      .then(convertLicenseStates)
+      .then(addId) // Add id
+      .then(addDuplicationField) // Add duplicate with
+      .then(convertYearlyIncome) // Convert yearly income to decimal
+      .then(convertHasChildren) // Convert empty string to 'false'
+      .then(convertLicenseStates) // Convert states to abbreviations
       .then((data) => {
         dispatch({
           type: PARSE_FILE,
