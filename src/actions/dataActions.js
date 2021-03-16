@@ -11,7 +11,9 @@ export const parseFile = (file) => (dispatch) => {
       .then((data) => getDuplication(data))
       .then((data) =>
         data.map((obj) => {
-          return { ...obj, [HAS_CHILDREN]: String(obj[HAS_CHILDREN]) };
+          const hasChildren =
+            obj[HAS_CHILDREN] != null ? String(obj[HAS_CHILDREN]) : 'false';
+          return { ...obj, [HAS_CHILDREN]: hasChildren };
         })
       )
       .then((data) => {
