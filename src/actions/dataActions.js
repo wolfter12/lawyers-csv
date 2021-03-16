@@ -1,9 +1,9 @@
+import Ajv from 'ajv';
 import { PARSE_FILE, VALID_STRUCTURE } from './types';
-import csv from '../parser/csv';
-import getDuplication from '../utils/mark-duplication';
 import { HAS_CHILDREN, LICENSE_STATES } from '../configs/header-accessors';
 import statesJSON from '../configs/states_titlecase.json';
-import Ajv from 'ajv';
+import csv from '../parser/csv';
+import getDuplication from '../utils/mark-duplication';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
