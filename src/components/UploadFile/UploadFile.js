@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFileName } from '../../actions/fileActions';
 import { parseFile } from '../../actions/dataActions';
 import { Button, Form } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
@@ -12,9 +11,9 @@ function UploadFile() {
   const dispatch = useDispatch();
 
   const changeHandler = (event) => {
-    setFile(event.target.files[0]);
-    if (file.hasOwnProperty('name')) {
-      dispatch(addFileName(file.name));
+    const selectedFile = event.target.files[0];
+    if (selectedFile !== undefined) {
+      setFile(selectedFile);
     }
   };
 
