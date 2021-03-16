@@ -12,7 +12,9 @@ import {
 import { validate as emailValidator } from 'email-validator';
 import {
   DATE_FORMATS,
+  MAX_AGE,
   MAX_YEARLY_INCOME,
+  MIN_AGE,
   PHONE_FORMATS,
 } from '../configs/constants';
 import moment from 'moment';
@@ -41,8 +43,9 @@ export const isEmailValid = (value) => {
 
 // TODO: Ask the client about max age limit
 export const isAgeValid = (value) => {
-  // const checkAge = (age) => Number.isInteger(age) && age >= 21 && age <= 150;
-  const checkAge = (age) => Number.isInteger(age) && age >= 21;
+  const checkAge = (age) => {
+    return Number.isInteger(age) && age >= MIN_AGE && age <= MAX_AGE;
+  };
   switch (typeof value) {
     case 'number':
       return checkAge(value);
