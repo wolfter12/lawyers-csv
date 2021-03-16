@@ -12,9 +12,10 @@ function UploadFile() {
   const dispatch = useDispatch();
 
   const changeHandler = (event) => {
-    const file = event.target.files[0];
-    dispatch(addFileName(file.name));
-    setFile(file);
+    setFile(event.target.files[0]);
+    if (file.hasOwnProperty('name')) {
+      dispatch(addFileName(file.name));
+    }
   };
 
   const parseSelectedFile = () => {
