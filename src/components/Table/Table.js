@@ -19,7 +19,7 @@ function Table() {
   });
 
   return (
-    <BTable bordered hover {...getTableProps()}>
+    <BTable striped bordered hover {...getTableProps()}>
       <caption>{fileName}</caption>
       <thead>
         {headerGroups.map((headerGroup) => (
