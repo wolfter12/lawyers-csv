@@ -4,6 +4,7 @@ import ReactFileReader from 'react-file-reader';
 import { parseFile } from '../../actions/dataActions';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
+import { IMPORT_BUTTON_VARIANT } from '../../configs/constants';
 
 function UploadFile() {
   const dispatch = useDispatch();
@@ -17,13 +18,15 @@ function UploadFile() {
   };
 
   return (
-    <Container fluid className="text-right mt-4 mb-4">
+    <Container fluid className="d-flex flex-row-reverse mt-4 mb-4 p-0">
       <ReactFileReader
         fileTypes={['.csv']}
         multiplyFiles={false}
         handleFiles={handleFiles}
       >
-        <Button>Import users</Button>
+        <Button variant={IMPORT_BUTTON_VARIANT} size="lg">
+          Import users
+        </Button>
       </ReactFileReader>
     </Container>
   );
