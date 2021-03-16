@@ -7,11 +7,13 @@ import {
 import { WARNING_MESSAGE } from '../configs/constants';
 import statesJSON from '../configs/states_titlecase.json';
 import csv from '../parser/csv';
-import getDuplication from '../utils/mark-duplication';
+import addId from '../utils/add-id';
+import addDuplicationField from '../utils/add-duplication-field';
 import requiredFieldValidator from '../utils/csv-required-fields-validator';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
+// TODO: simplify callbacks
 export const parseFile = (file) => (dispatch) => {
   if (file instanceof Blob) {
     csv(file)
@@ -23,8 +25,8 @@ export const parseFile = (file) => (dispatch) => {
         });
         return data;
       })
-      .then((data) => data.map((obj, idx) => ({ id: idx + 1, ...obj })))
-      .then((data) => getDuplication(data))
+      .then((data) => addId(data))
+      .then((data) => addDuplicationField(data))
       .then((data) => {
         return data.map((obj) => {
           const value = obj[YEARLY_INCOME];
