@@ -4,3 +4,5 @@ export const WARNING_MESSAGE = 'File format is not correct';
 export const WARNING_ALERT_VARIANT = 'danger';
 export const INVALID_CELL = 'table-danger';
 export const PHONE_FORMATS = [/^\+1\d{10}$/, /^1\d{10}$/, /^\d{10}$/];
+export const MIN_AGE = 21;
+export const MAX_AGE = 150;
