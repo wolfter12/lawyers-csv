@@ -1,1 +1,2 @@
 export const PARSE_FILE = 'PARSE_FILE';
+export const VALID_STRUCTURE = 'VALID_STRUCTURE';
