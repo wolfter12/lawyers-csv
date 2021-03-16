@@ -15,7 +15,7 @@ export const parseFile = (file) => (dispatch) => {
         const schema = {
           properties: {
             fullName: { type: 'string' },
-            phone: { type: 'string' },
+            phone: { type: ['string', 'integer'] },
             email: { type: 'string' },
           },
           required: ['fullName', 'phone', 'email'],
