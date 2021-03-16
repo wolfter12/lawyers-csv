@@ -1,15 +1,38 @@
-import { PARSE_FILE } from './types';
+import { PARSE_FILE, VALID_STRUCTURE } from './types';
 import csv from '../parser/csv';
 import getDuplication from '../utils/mark-duplication';
 import { HAS_CHILDREN, LICENSE_STATES } from '../configs/header-accessors';
 import statesJSON from '../configs/states_titlecase.json';
+import Ajv from 'ajv';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
 export const parseFile = (file) => (dispatch) => {
   if (file instanceof Blob) {
     csv(file)
-      .then(({ data }) => data.map((obj, idx) => ({ id: idx + 1, ...obj })))
+      .then(({ data }) => {
+        const ajv = new Ajv();
+        const schema = {
+          properties: {
+            fullName: { type: 'string' },
+            phone: { type: 'string' },
+            email: { type: 'string' },
+          },
+          required: ['fullName', 'phone', 'email'],
+        };
+        const validate = ajv.compile(schema);
+        const valid = data.every((obj) => validate(obj));
+        dispatch({
+          type: VALID_STRUCTURE,
+          valid,
+        });
+        console.log('is valid', valid);
+        if (!valid) {
+          return Promise.reject('File format is not correct');
+        }
+        return data;
+      })
+      .then((data) => data.map((obj, idx) => ({ id: idx + 1, ...obj })))
       .then((data) => getDuplication(data))
       .then((data) =>
         data.map((obj) => {
@@ -47,7 +70,7 @@ export const parseFile = (file) => (dispatch) => {
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 };
