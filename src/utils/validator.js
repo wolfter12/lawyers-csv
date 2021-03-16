@@ -17,6 +17,7 @@ import {
   MAX_YEARLY_INCOME,
   MIN_AGE,
   PHONE_FORMATS,
+  LICENSE_NUMBER_FORMATS,
 } from '../configs/constants';
 import moment from 'moment';
 import statesJSON from '../configs/states_titlecase.json';
@@ -112,7 +113,6 @@ export const isExpirationDateValid = (value) => {
   return false;
 };
 
-// TODO: Empty string must display as false
 export const isHasChildrenValid = (value) => {
   if (typeof value !== 'string') {
     return false;
@@ -121,7 +121,9 @@ export const isHasChildrenValid = (value) => {
 };
 
 export const isLicenseNumberValid = (value) => {
-  const checkLicenseNumber = (str) => /^[a-zA-Z0-9]{6}$/.test(str);
+  const checkLicenseNumber = (str) => {
+    return LICENSE_NUMBER_FORMATS.some((reg) => reg.test(str));
+  };
   switch (typeof value) {
     case 'string':
       return checkLicenseNumber(value);
