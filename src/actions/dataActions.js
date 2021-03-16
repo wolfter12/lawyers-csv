@@ -13,7 +13,6 @@ import requiredFieldValidator from '../utils/csv-required-fields-validator';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
-// TODO: simplify callbacks
 export const parseFile = (file) => (dispatch) => {
   if (file instanceof Blob) {
     csv(file)
@@ -25,8 +24,8 @@ export const parseFile = (file) => (dispatch) => {
         });
         return data;
       })
-      .then((data) => addId(data))
-      .then((data) => addDuplicationField(data))
+      .then(addId)
+      .then(addDuplicationField)
       .then((data) => {
         return data.map((obj) => {
           const value = obj[YEARLY_INCOME];
