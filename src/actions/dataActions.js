@@ -10,6 +10,7 @@ import csv from '../parser/csv';
 import addId from '../utils/add-id';
 import addDuplicationField from '../utils/add-duplication-field';
 import requiredFieldValidator from '../utils/csv-required-fields-validator';
+import convertYearlyIncome from '../utils/convert-yearly-income';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
@@ -26,18 +27,7 @@ export const parseFile = (file) => (dispatch) => {
       })
       .then(addId)
       .then(addDuplicationField)
-      .then((data) => {
-        return data.map((obj) => {
-          const value = obj[YEARLY_INCOME];
-          if (typeof value === 'number' && !Number.isNaN(value)) {
-            return {
-              ...obj,
-              [YEARLY_INCOME]: Number.parseFloat(value).toFixed(2),
-            };
-          }
-          return obj;
-        });
-      })
+      .then(convertYearlyIncome)
       .then((data) =>
         data.map((obj) => {
           const hasChildren =
