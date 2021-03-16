@@ -10,6 +10,7 @@ function Table() {
   // TODO: useMemo to not recalculate on every single render
 
   const data = useSelector((state) => state.data);
+  const fileName = useSelector((state) => state.file);
 
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
@@ -19,6 +20,7 @@ function Table() {
 
   return (
     <BTable bordered hover {...getTableProps()}>
+      <caption>{fileName}</caption>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
