@@ -13,6 +13,7 @@ import { validate as emailValidator } from 'email-validator';
 import {
   DATE_FORMATS,
   MAX_AGE,
+  MIN_YEARLY_INCOME,
   MAX_YEARLY_INCOME,
   MIN_AGE,
   PHONE_FORMATS,
@@ -61,7 +62,6 @@ export const isAgeValid = (value) => {
 };
 
 // TODO: Ask a client about type of number (int or float)
-// TODO: Use constants instead of magic numbers
 export const isExperienceValid = (value, age = MIN_AGE) => {
   const checkExperience = (number, currentAge) => {
     return number >= 0 && number <= currentAge - MIN_AGE;
@@ -85,7 +85,7 @@ export const isExperienceValid = (value, age = MIN_AGE) => {
 
 export const isYearlyIncomeValid = (value) => {
   const checkYearlyIncome = (income) => {
-    return income >= 0 && income <= MAX_YEARLY_INCOME;
+    return income >= MIN_YEARLY_INCOME && income <= MAX_YEARLY_INCOME;
   };
   switch (typeof value) {
     case 'number':
