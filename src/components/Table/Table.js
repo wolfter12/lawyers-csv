@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import BTable from 'react-bootstrap/Table';
 import { useTable } from 'react-table';
 import columns from '../../configs/columns';
 import validator from '../../utils/validator';
+import BTable from 'react-bootstrap/Table';
+import { INVALID_CELL } from '../../configs/constants';
 
 function Table() {
   // TODO: useMemo to not recalculate on every single render
@@ -17,7 +18,7 @@ function Table() {
   });
 
   return (
-    <BTable striped bordered hover size="md" {...getTableProps()}>
+    <BTable bordered hover {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -41,9 +42,9 @@ function Table() {
                 const cellProps = { ...cell.getCellProps() };
                 if (!isValid) {
                   if (cellProps.hasOwnProperty('className')) {
-                    cellProps.className = `${cellProps.className} table-warning`;
+                    cellProps.className = `${cellProps.className} ${INVALID_CELL}`;
                   } else {
-                    cellProps.className = 'table-warning';
+                    cellProps.className = INVALID_CELL;
                   }
                 }
                 return <td {...cellProps}>{cell.render('Cell')}</td>;
