@@ -4,6 +4,7 @@ import {
   EXPERIENCE,
   EXPIRATION_DATE,
   HAS_CHILDREN,
+  LICENSE_NUMBER,
   PHONE,
   YEARLY_INCOME,
 } from '../configs/header-accessors';
@@ -106,12 +107,25 @@ export const isExpirationDateValid = (value) => {
   return false;
 };
 
+// TODO: Empty string must display as false
 export const isHasChildrenValid = (value) => {
   if (typeof value !== 'string') {
     return false;
   }
   // if it is an empty string then field is valid
   return value === 'true' || value === 'false' || value.length === 0;
+};
+
+export const isLicenseNumberValid = (value) => {
+  const checkLicenseNumber = (str) => /^[a-zA-Z0-9]{6}$/.test(str);
+  switch (typeof value) {
+    case 'string':
+      return checkLicenseNumber(value);
+    case 'number':
+      return checkLicenseNumber(String(value));
+    default:
+      return false;
+  }
 };
 
 // TODO: Add exception for not important columns
@@ -131,6 +145,8 @@ const validator = (value, header, row) => {
       return isExpirationDateValid(value);
     case HAS_CHILDREN:
       return isHasChildrenValid(value);
+    case LICENSE_NUMBER:
+      return isLicenseNumberValid(value);
     default:
       return true;
   }
