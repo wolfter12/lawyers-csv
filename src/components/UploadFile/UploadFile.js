@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { parseFile } from '../../actions/dataActions';
 import { Button, Form } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 
 function UploadFile() {
   const [file, setFile] = useState({});
-  const data = useSelector((state) => state.data);
 
   const dispatch = useDispatch();
 
@@ -22,10 +21,6 @@ function UploadFile() {
     setFile({});
   };
 
-  const showData = () => {
-    console.log('Parsed data:', data);
-  };
-
   return (
     <Container fluid className="flex-column mt-4 mb-4">
       <Form.Group>
@@ -36,7 +31,6 @@ function UploadFile() {
         />
       </Form.Group>
       <Button onClick={parseSelectedFile}>Parse file</Button>
-      <Button onClick={showData}>Show Data</Button>
     </Container>
   );
 }
