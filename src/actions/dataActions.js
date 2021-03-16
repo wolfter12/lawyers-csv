@@ -11,6 +11,7 @@ import addId from '../utils/add-id';
 import addDuplicationField from '../utils/add-duplication-field';
 import requiredFieldValidator from '../utils/csv-required-fields-validator';
 import convertYearlyIncome from '../utils/convert-yearly-income';
+import convertHasChildren from '../utils/convert-has-children';
 
 // TODO: convert all boolean to string
 // TODO: ask the client about a range of input formats
@@ -28,13 +29,7 @@ export const parseFile = (file) => (dispatch) => {
       .then(addId)
       .then(addDuplicationField)
       .then(convertYearlyIncome)
-      .then((data) =>
-        data.map((obj) => {
-          const hasChildren =
-            obj[HAS_CHILDREN] != null ? String(obj[HAS_CHILDREN]) : 'false';
-          return { ...obj, [HAS_CHILDREN]: hasChildren };
-        })
-      )
+      .then(convertHasChildren)
       .then((data) => {
         return data.map((obj) => {
           const currentDataStates = obj[LICENSE_STATES].split(/\s*\|\s*/);
