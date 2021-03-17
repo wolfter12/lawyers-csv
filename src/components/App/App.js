@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 function App() {
   const valid = useSelector((state) => state.valid);
   return (
-    <Container fluid="xl">
+    <Container fluid>
       <UploadFile />
       {valid ? <Table /> : <Warning />}
       {valid && <UploadFile />}
