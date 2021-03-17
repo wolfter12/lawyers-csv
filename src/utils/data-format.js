@@ -29,7 +29,7 @@ export const hasChildFormatter = (value) => {
   if (value.length === 0) {
     return 'false';
   }
-  return value;
+  return value.toLowerCase();
 };
 
 // License states
