@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTable } from 'react-table';
 import { INVALID_CELL } from '../../configs/constants';
-import columns from '../../configs/columns';
-import validator from '../../utils/validator';
 import BTable from 'react-bootstrap/Table';
+import columns from '../../configs/columns';
+import validator from '../../utils/table-cell-validator';
 
 function Table() {
   // TODO: useMemo to not recalculate on every single render
@@ -18,7 +18,7 @@ function Table() {
   });
 
   return (
-    <BTable striped bordered hover {...getTableProps()}>
+    <BTable bordered hover {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -28,7 +28,7 @@ function Table() {
           </tr>
         ))}
       </thead>
-      <tbody>
+      <tbody className="border border-dark">
         {rows.map((row, i) => {
           prepareRow(row);
           return (
