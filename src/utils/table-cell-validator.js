@@ -43,7 +43,6 @@ export const isEmailValid = (value) => {
   return emailValidator(value);
 };
 
-// TODO: Ask the client about max age limit
 export const isAgeValid = (value) => {
   const checkAge = (age) => {
     return (
@@ -57,7 +56,6 @@ export const isAgeValid = (value) => {
   return checkAge(age);
 };
 
-// TODO: Ask a client about type of number (int or float)
 export const isExperienceValid = (value, age) => {
   const checkExperience = (number, currentAge) => {
     return number >= 0 && number <= currentAge - MIN_AGE;
@@ -101,11 +99,8 @@ export const isLicenseNumberValid = (value) => {
 };
 
 export const isLicenseStateValid = (value) => {
-  if (value.length !== 6) {
-    return false;
-  }
-  const currentStates = value.split(/\s*\|\s*/);
-  return currentStates.every((str) => {
+  const currentStates = /\|/.test(value) ? value.split(/\s*\|\s*/) : [value];
+  return currentStates.filter(Boolean).every((str) => {
     return statesJSON.some(({ name, abbreviation }) => {
       return (
         name.toLowerCase() === str.toLowerCase() ||
@@ -115,7 +110,6 @@ export const isLicenseStateValid = (value) => {
   });
 };
 
-// TODO: Add exception for not important columns
 const validator = (value, header, row) => {
   switch (header) {
     case PHONE:
