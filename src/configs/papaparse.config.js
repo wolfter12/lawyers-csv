@@ -6,11 +6,13 @@ import {
   YEARLY_INCOME,
   LICENSE_STATES,
 } from './header-accessors';
-import phoneFormatter from '../utils/phone-formatter';
-import emailFormatter from '../utils/email-formatter';
-import hasChildFormatter from '../utils/has-children-formatter';
-import yearlyIncomeFormatter from '../utils/yearly-income-formatter';
-import licenseStatesFormatter from '../utils/license-states-formatter';
+import {
+  phoneFormatter,
+  emailFormatter,
+  hasChildFormatter,
+  yearlyIncomeFormatter,
+  licenseStatesFormatter,
+} from '../utils/data-format';
 
 // TODO: Check prevalidation in tables
 // https://stackoverflow.com/questions/56219293/display-boolean-and-timestamp-values-inside-react-table-react-table-reacttyp#answer-58363447
@@ -33,13 +35,13 @@ const dataNormalize = (value, header) => {
   }
 };
 
-const headerNormalize = (value) => _.camelCase(value.toLowerCase());
+const toPascalCase = (str) => _.camelCase(str.toLowerCase());
 
 const options = {
   header: true,
   worker: false, // when true there is a problem with next parsing
   skipEmptyLines: true,
-  transformHeader: headerNormalize,
+  transformHeader: toPascalCase,
   comments: true,
   transform: dataNormalize,
   dynamicTyping: false, // can be a problem with display data
