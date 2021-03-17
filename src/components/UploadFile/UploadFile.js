@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
-import { parseFile } from '../../actions/dataActions';
+import { parseFile, deleteData } from '../../actions/dataActions';
 import { changeValidity } from '../../actions/validationActions';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
@@ -17,6 +17,7 @@ function UploadFile() {
       dispatch(parseFile(file));
     } else {
       dispatch(changeValidity(false));
+      dispatch(deleteData());
     }
   };
 

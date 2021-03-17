@@ -1,4 +1,4 @@
-import { PARSE_FILE, VALID_STRUCTURE } from './types';
+import { PARSE_FILE, VALID_STRUCTURE, DELETE_DATA } from './types';
 import { WARNING_MESSAGE } from '../configs/constants';
 import csv from '../parser/csv';
 import requiredFieldValidator from '../utils/csv-required-fields-validator';
@@ -37,4 +37,10 @@ export const parseFile = (file) => (dispatch) => {
         }
       });
   }
+};
+
+export const deleteData = () => (dispatch) => {
+  dispatch({
+    type: DELETE_DATA,
+  });
 };
