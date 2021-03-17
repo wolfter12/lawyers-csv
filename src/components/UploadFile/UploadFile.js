@@ -1,23 +1,30 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
-import { parseFile, deleteData } from '../../actions/dataActions';
+import {
+  parseFile,
+  deleteData,
+  changeIsLoading,
+} from '../../actions/dataActions';
 import { changeValidity } from '../../actions/validationActions';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { IMPORT_BUTTON_VARIANT } from '../../configs/constants';
 
 function UploadFile() {
+  const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
   const handleFiles = (files) => {
-    const [file] = files;
-    const { name } = file;
-    if (name.split('.').pop() === 'csv') {
-      dispatch(parseFile(file));
-    } else {
-      dispatch(changeValidity(false));
-      dispatch(deleteData());
+    if (!loading) {
+      const [file] = files;
+      if (file.name.split('.').pop() === 'csv') {
+        dispatch(changeIsLoading(true));
+        dispatch(parseFile(file));
+      } else {
+        dispatch(changeValidity(false));
+        dispatch(deleteData());
+      }
     }
   };
 
