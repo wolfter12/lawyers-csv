@@ -7,11 +7,8 @@ import columns from '../../configs/columns';
 import validator from '../../utils/table-cell-validator';
 
 function Table() {
-  // TODO: useMemo to not recalculate on every single render
-
   const data = useSelector((state) => state.data);
 
-  // Use the state and functions returned from useTable to build your UI
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
     columns,
     data,
@@ -37,9 +34,6 @@ function Table() {
                 const { id: header } = cell.column;
                 const { value } = cell;
                 let isValid = validator(value, header, cell.row.original);
-
-                // TODO: find more safer way to add class
-                // Add class if data is invalid
                 const cellProps = { ...cell.getCellProps() };
                 if (!isValid) {
                   if (cellProps.hasOwnProperty('className')) {

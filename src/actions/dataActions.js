@@ -5,8 +5,6 @@ import requiredFieldValidator from '../utils/csv-required-fields-validator';
 import addId from '../utils/add-id';
 import addDuplicationField from '../utils/add-duplication-field';
 
-// TODO: convert all boolean to string
-// TODO: ask the client about a range of input formats
 export const parseFile = (file) => (dispatch) => {
   if (file instanceof Blob) {
     csv(file)

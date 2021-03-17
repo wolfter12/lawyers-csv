@@ -14,8 +14,6 @@ import {
   licenseStatesFormatter,
 } from '../utils/data-format';
 
-// TODO: Check prevalidation in tables
-// https://stackoverflow.com/questions/56219293/display-boolean-and-timestamp-values-inside-react-table-react-table-reacttyp#answer-58363447
 const dataNormalize = (value, header) => {
   let str = _.trim(value, `'" `);
 
