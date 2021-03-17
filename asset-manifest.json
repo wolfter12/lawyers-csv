@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/lawyers-csv/static/css/main.cd023121.chunk.css",
-    "main.js": "/lawyers-csv/static/js/main.63d87dd9.chunk.js",
-    "main.js.map": "/lawyers-csv/static/js/main.63d87dd9.chunk.js.map",
+    "main.js": "/lawyers-csv/static/js/main.0b47f34d.chunk.js",
+    "main.js.map": "/lawyers-csv/static/js/main.0b47f34d.chunk.js.map",
     "runtime-main.js": "/lawyers-csv/static/js/runtime-main.4b57e7e1.js",
     "runtime-main.js.map": "/lawyers-csv/static/js/runtime-main.4b57e7e1.js.map",
     "static/css/2.4c97ca4f.chunk.css": "/lawyers-csv/static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.f33e82ef.chunk.js": "/lawyers-csv/static/js/2.f33e82ef.chunk.js",
-    "static/js/2.f33e82ef.chunk.js.map": "/lawyers-csv/static/js/2.f33e82ef.chunk.js.map",
+    "static/js/2.7d056330.chunk.js": "/lawyers-csv/static/js/2.7d056330.chunk.js",
+    "static/js/2.7d056330.chunk.js.map": "/lawyers-csv/static/js/2.7d056330.chunk.js.map",
     "static/js/3.26d21772.chunk.js": "/lawyers-csv/static/js/3.26d21772.chunk.js",
     "static/js/3.26d21772.chunk.js.map": "/lawyers-csv/static/js/3.26d21772.chunk.js.map",
     "index.html": "/lawyers-csv/index.html",
     "static/css/2.4c97ca4f.chunk.css.map": "/lawyers-csv/static/css/2.4c97ca4f.chunk.css.map",
     "static/css/main.cd023121.chunk.css.map": "/lawyers-csv/static/css/main.cd023121.chunk.css.map",
-    "static/js/2.f33e82ef.chunk.js.LICENSE.txt": "/lawyers-csv/static/js/2.f33e82ef.chunk.js.LICENSE.txt"
+    "static/js/2.7d056330.chunk.js.LICENSE.txt": "/lawyers-csv/static/js/2.7d056330.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4b57e7e1.js",
     "static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.f33e82ef.chunk.js",
+    "static/js/2.7d056330.chunk.js",
     "static/css/main.cd023121.chunk.css",
-    "static/js/main.63d87dd9.chunk.js"
+    "static/js/main.0b47f34d.chunk.js"
   ]
 }
