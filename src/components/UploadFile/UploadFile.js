@@ -18,7 +18,7 @@ function UploadFile() {
   };
 
   return (
-    <Container fluid className="d-flex flex-row-reverse mt-4 mb-4 p-0">
+    <Container fluid="md" className="d-flex flex-row-reverse mt-4 mb-4">
       <ReactFileReader
         fileTypes={['.csv']}
         multiplyFiles={false}
