@@ -34,8 +34,8 @@ export const hasChildFormatter = (value) => {
 
 // License states
 export const licenseStatesFormatter = (value) => {
-  const statesArr = value.split(/\s*\|\s*/);
-  const statesAbbreviationArr = statesArr.map((str) => {
+  const statesArr = /\|/.test(value) ? value.split(/\s*\|\s*/) : [value];
+  const statesAbbreviationArr = statesArr.filter(Boolean).map((str) => {
     const state = statesJSON.find(({ name, abbreviation }) => {
       return (
         name.toLowerCase() === str.toLowerCase() ||
