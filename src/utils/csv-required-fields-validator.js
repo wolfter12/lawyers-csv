@@ -4,9 +4,9 @@ import { WARNING_MESSAGE } from '../configs/constants';
 
 const schema = {
   properties: {
-    fullName: { type: 'string' },
-    phone: { type: ['string', 'integer'] },
-    email: { type: 'string' },
+    fullName: { type: 'string', minLength: 1 },
+    phone: { type: 'string', minLength: 1 },
+    email: { type: 'string', minLength: 1 },
   },
   required: [FULL_NAME, PHONE, EMAIL],
 };
