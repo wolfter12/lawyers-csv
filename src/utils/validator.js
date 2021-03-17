@@ -46,66 +46,45 @@ export const isEmailValid = (value) => {
 // TODO: Ask the client about max age limit
 export const isAgeValid = (value) => {
   const checkAge = (age) => {
-    return Number.isInteger(age) && age >= MIN_AGE && age <= MAX_AGE;
+    return (
+      Number.isNaN(age) !== true &&
+      Number.isInteger(age) &&
+      age >= MIN_AGE &&
+      age <= MAX_AGE
+    );
   };
-  switch (typeof value) {
-    case 'number':
-      return checkAge(value);
-    case 'string':
-      const ageNumber = Number(value);
-      if (isNaN(ageNumber)) {
-        return false;
-      }
-      return checkAge(ageNumber);
-    default:
-      return false;
-  }
+  const age = Number(value);
+  return checkAge(age);
 };
 
 // TODO: Ask a client about type of number (int or float)
-export const isExperienceValid = (value, age = MIN_AGE) => {
+export const isExperienceValid = (value, age) => {
   const checkExperience = (number, currentAge) => {
     return number >= 0 && number <= currentAge - MIN_AGE;
   };
-  const ageType = typeof age;
-  const ageValue =
-    ageType === 'number' ? age : ageType === 'string' ? Number(age) : 0;
-  switch (typeof value) {
-    case 'number':
-      return checkExperience(value, ageValue);
-    case 'string':
-      const experienceNumber = Number(value);
-      if (isNaN(experienceNumber)) {
-        return false;
-      }
-      return checkExperience(experienceNumber, ageValue);
-    default:
-      return false;
+  const experienceNumber = Number(value);
+  const ageNumber = Number(age);
+  if (Number.isNaN(experienceNumber)) {
+    return false;
   }
+  if (Number.isNaN(ageNumber) || !Number.isInteger(ageNumber)) {
+    return checkExperience(experienceNumber, MIN_AGE);
+  }
+  return checkExperience(experienceNumber, ageNumber);
 };
 
 export const isYearlyIncomeValid = (value) => {
   const checkYearlyIncome = (income) => {
     return income >= MIN_YEARLY_INCOME && income <= MAX_YEARLY_INCOME;
   };
-  switch (typeof value) {
-    case 'number':
-      return checkYearlyIncome(value);
-    case 'string':
-      const yearlyIncomeNumber = Number(value);
-      if (isNaN(yearlyIncomeNumber)) {
-        return false;
-      }
-      return checkYearlyIncome(yearlyIncomeNumber);
-    default:
-      return false;
+  const yearlyIncomeNumber = Number(value);
+  if (Number.isNaN(yearlyIncomeNumber)) {
+    return false;
   }
+  return checkYearlyIncome(yearlyIncomeNumber);
 };
 
 export const isExpirationDateValid = (value) => {
-  if (typeof value !== 'string') {
-    return false;
-  }
   const isValidFormat = moment(value, DATE_FORMATS, true).isValid();
   if (isValidFormat) {
     return moment().diff(value) <= 0;
@@ -114,28 +93,15 @@ export const isExpirationDateValid = (value) => {
 };
 
 export const isHasChildrenValid = (value) => {
-  if (typeof value !== 'string') {
-    return false;
-  }
-  return value === 'true' || value === 'false';
+  return value === 'true' || value === 'false' || value.length === 0;
 };
 
 export const isLicenseNumberValid = (value) => {
-  const checkLicenseNumber = (str) => {
-    return LICENSE_NUMBER_FORMATS.some((reg) => reg.test(str));
-  };
-  switch (typeof value) {
-    case 'string':
-      return checkLicenseNumber(value);
-    case 'number':
-      return checkLicenseNumber(String(value));
-    default:
-      return false;
-  }
+  return LICENSE_NUMBER_FORMATS.some((reg) => reg.test(value));
 };
 
 export const isLicenseStateValid = (value) => {
-  if (typeof value !== 'string' || value.length === 0) {
+  if (value.length !== 6) {
     return false;
   }
   const currentStates = value.split(/\s*\|\s*/);
