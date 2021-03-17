@@ -1,15 +1,20 @@
 import _ from 'lodash';
+import {
+  PHONE,
+  EMAIL,
+  HAS_CHILDREN,
+  YEARLY_INCOME,
+  LICENSE_STATES,
+} from './header-accessors';
 import phoneFormatter from '../utils/phone-formatter';
 import emailFormatter from '../utils/email-formatter';
-import { PHONE, EMAIL } from './header-accessors';
+import hasChildFormatter from '../utils/has-children-formatter';
+import yearlyIncomeFormatter from '../utils/yearly-income-formatter';
+import licenseStatesFormatter from '../utils/license-states-formatter';
 
 // TODO: Check prevalidation in tables
 // https://stackoverflow.com/questions/56219293/display-boolean-and-timestamp-values-inside-react-table-react-table-reacttyp#answer-58363447
 const dataNormalize = (value, header) => {
-  if (typeof value === 'number') {
-    return value;
-  }
-
   let str = _.trim(value, `'" `);
 
   switch (header) {
@@ -17,6 +22,12 @@ const dataNormalize = (value, header) => {
       return phoneFormatter(str);
     case EMAIL:
       return emailFormatter(str);
+    case HAS_CHILDREN:
+      return hasChildFormatter(str);
+    case YEARLY_INCOME:
+      return yearlyIncomeFormatter(str);
+    case LICENSE_STATES:
+      return licenseStatesFormatter(str);
     default:
       return str;
   }
@@ -31,7 +42,7 @@ const options = {
   transformHeader: headerNormalize,
   comments: true,
   transform: dataNormalize,
-  dynamicTyping: true, // can be a problem with display data
+  dynamicTyping: false, // can be a problem with display data
 };
 
 export default options;
