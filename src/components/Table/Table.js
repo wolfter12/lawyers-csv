@@ -19,7 +19,7 @@ function Table() {
 
   return (
     <BTable bordered hover {...getTableProps()}>
-      <thead>
+      <thead className="thead-dark">
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
@@ -28,7 +28,7 @@ function Table() {
           </tr>
         ))}
       </thead>
-      <tbody className="border border-dark">
+      <tbody>
         {rows.map((row, i) => {
           prepareRow(row);
           return (
